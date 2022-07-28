@@ -1,0 +1,31 @@
+{
+  "name": "event_emitter",
+  "version": "1.0.0",
+  "description": "A listener to an event and fire a callback after event being emitted.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YinHk/event_emitter.git"
+  },
+  "keywords": [
+    "event",
+    "events",
+    "listener",
+    "emitter",
+    "emits",
+    "emit",
+    "pubsub"
+  ],
+  "author": "YinHk (Ken Ng)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YinHk/event_emitter/issues"
+  },
+  "homepage": "https://github.com/YinHk/event_emitter#readme",
+  "dependencies": {
+    "mocha": "^10.0.0"
+  }
+}
