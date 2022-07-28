@@ -8,8 +8,10 @@ Emitter.prototype.count = function count(e) {
         else return Object.keys(this.events).length;
 }
 
-function addCallback(e, cb, once, this) {
-    let cbs = this.events[e];
+function addCallback(e, cb, once, events) {
+    if (events.e) cbs = events.e;
+        else 
+    //let cbs = Object.assign(e, {'event': []})
     if (!cbs) cbs = [];
     if (once)  {
         function onceListener (...payload) {
@@ -24,7 +26,7 @@ function addCallback(e, cb, once, this) {
 
 Emitter.prototype.on = function on(e, cb) {
     if (e && cb) {
-        if(typeof cb == 'function') addCallback(e, cb, false, this);
+        if(typeof cb == 'function') addCallback(e, cb, false, this.events);
             else throw new TypeError(`You add a listener as a type of ${typeof cb}, the type should be a function`);
     }
     return this;
@@ -32,7 +34,7 @@ Emitter.prototype.on = function on(e, cb) {
 
 Emitter.prototype.once = function once(e, cb) {
     if (e && cb) {
-        if(typeof cb == 'function') addCallback(e, cb, true, this); 
+        if(typeof cb == 'function') addCallback(e, cb, true, this.events); 
     }
     return this;
 }
