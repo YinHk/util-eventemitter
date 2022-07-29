@@ -4,7 +4,9 @@
   "description": "A listener to an event and fire a callback after event being emitted.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "minify": "uglifyjs ./emitter.js ./index.js -o dist/event_emitter.min.js",
+    "build": "npm test && npm run minify"
   },
   "repository": {
     "type": "git",
@@ -30,7 +32,8 @@
     "mocha": "^10.0.0",
     "mocha-sinon": "^2.1.2",
     "sinon": "^14.0.0",
-    "sinon-chai": "^3.7.0"
+    "sinon-chai": "^3.7.0",
+    "uglify-js": "^3.16.3"
   },
   "devDependencies": {
     "chai": "^4.3.6"
