@@ -48,7 +48,7 @@ Emitter.prototype.off = function off(e, cb) {
     if (e && cb) { 
         if (this.events[e]) {
             let cbs = [];
-            for (var j =0; j<this.events[e].length; j++) { 
+            for (var j = 0; j < this.events[e].length; j++) { 
                 if (cb !== this.events[e][j].cb) cbs.push(this.events[e][j]);
             }
             this.events[e] = cbs;
