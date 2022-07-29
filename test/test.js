@@ -19,8 +19,7 @@ describe('Subscribe a listerner to an event', function () {
         assert.hasAnyKeys(e.events, "test1");
         assert.hasAnyKeys(emitter.self.events, "test1");
         assert.lengthOf(Object.keys(e.events["test1"]), 1, "should be 1 listener only");
-        assert.lengthOf(Object.keys(emitter.self.events["test1"]), 1, "should be 1 listener only");
-            
+        assert.lengthOf(Object.keys(emitter.self.events["test1"]), 1, "should be 1 listener only");       
     });
 });
 
@@ -141,7 +140,33 @@ describe('Remove all listener', function () {
     });
 });
 
+describe('Number of events exist', function () {
 
+    it('return number of events', function () { 
+        e.removeAll();
+        emitter.removeAll();
+        e.on("baz", function () {});
+        e.on("qux", function () {});
+        emitter.on("baz", function () {});
+        emitter.on("qux", function () {});
+        assume(e.count()).equals(2);
+        assume(emitter.count()).equals(2);
+    });
+});
+
+describe('Check number of listeners being subscribed to an event', function () {
+
+    it('return number of events', function () { 
+        e.on("testing", function testFnA() {});
+        emitter.on("testing", function testFnA() {});
+        e.on("testing", function testFnB() {});
+        emitter.on("testing", function testFnB() {});
+        e.on("testing", function testFnC() {});
+        emitter.on("testing", function testFnC() {});
+        assume(e.count("testing")).equals(3); 
+        assume(emitter.count("testing")).equals(3);
+    });
+});
 
 
 
