@@ -8,20 +8,6 @@ Emitter.prototype.count = function count(e) {
         else return Object.keys(this.events).length;
 }
 
-/* function remove(e, cb, events) {
-    if (e && cb && events) {  
-        if (events[e] !== undefined) {
-            for (let i = 0; i<events[e].length; i++) { console.log(events[e][i])
-                if (events[e][i].name === 'onceFn' && events[e][i][0] === cb) { 
-                    events[e].splice(i, 1);
-                    bresk;
-                }
-            }
-            if (events[e].length === 0) delete events[e];
-        }
-    }
-} */
-
 function addCallback(e, cb, once, events) {
     let cbs;
     if (events[e] !== undefined) cbs = events[e]; 
@@ -62,8 +48,8 @@ Emitter.prototype.off = function off(e, cb) {
     if (e && cb) { 
         if (this.events[e]) {
             let cbs = [];
-            for (var j =0; j<this.events[e].length; j++) {
-                if (cb !== this.events[e][j][cb]) cbs.push(this.events[e][j]);
+            for (var j =0; j<this.events[e].length; j++) { 
+                if (cb !== this.events[e][j].cb) cbs.push(this.events[e][j]);
             }
             this.events[e] = cbs;
             if (this.count(e) === 0) delete this.events[e];  
