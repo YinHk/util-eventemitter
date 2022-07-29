@@ -1,8 +1,10 @@
-var assert = require('chai').assert;
-var expect = require('chai').expect;
-var chai = require("chai");
-var sinon = require("sinon");
-var sinonChai = require("sinon-chai");
+var assert = require('chai').assert
+    , expect = require('chai').expect
+    , chai = require("chai")
+    , sinon = require("sinon")
+    , sinonChai = require("sinon-chai")
+    , assume = require('assume');
+
 chai.use(sinonChai);
 
 var { emitter, Emitter }  = require('../index');
@@ -34,27 +36,62 @@ describe('Subscribe one time listerner to an event', function () {
     });
 });
 
-
-describe('emit an event', function () {
-    const testFn = function (cb) { 
-        cb("event is trigged");
+describe('Emit an event', function () {
+    const testFnA = function (cb1) { 
+        cb1("Event 'foo' is trigged");
     };
-    var cb = sinon.spy();
-    e.on("event", testFn(cb));
-    emitter.on("event", testFn(cb));
-    e.emit("A");
-    e.emit("B"); 
+    const testFnB = function (cb2) { 
+        cb2("Event 'bar' is trigged");
+    };
+    var cb1 = sinon.spy();
+    var cb2 = sinon.spy();
+    e.on("foo", () => testFnA(cb1));
+    emitter.on("bar", () => testFnB(cb2));
+    e.emit("foo");
+    emitter.emit("bar");
     
-    /* it('a listener is being subscribed to an event', function () { 
-        assert.hasAnyKeys(e.events, "event");
-        assert.hasAnyKeys(emitter.self.events, "event");
-        assert.lengthOf(Object.keys(e.events["event"]), 1, "should be 1 listener only");
-        assert.lengthOf(Object.keys(emitter.self.events["event"]), 1, "should be 1 listener only");
-    });  */
+    it('listeners are being subscribed to events', function () {
+        assert.hasAnyKeys(e.events, "foo");
+        assert.hasAnyKeys(emitter.self.events, "bar"); 
+        assert.lengthOf(Object.keys(e.events["foo"]), 1, "should be 3 listeners");
+        assert.lengthOf(Object.keys(emitter.self.events["bar"]), 1, "should be 3 listeners");
+    });
     it('callback is being executed when emitting an event', function () {
-       //expect(cb1).to.have.been.calledWith("event A is trigged");
-        //expect(cb2).to.have.been.calledWith("event B is trigged");
+       expect(cb1).to.have.been.calledWith("Event 'foo' is trigged");
+       expect(cb2).to.have.been.calledWith("Event 'bar' is trigged");
     }); 
+});
+
+describe('Ensure once emittance only for one time listener', function () {
+    var count1 = 0
+        , count2 = 0
+        , multiple = 0;
+
+    e.once("one", function () {
+        count1++;
+    });
+    /* emitter.once("one", function () {
+        count2++;
+    }); */
+    /* e.on("one", function () {
+        multiple++;
+    }); */
+    /* emitter.on("one", function () {
+        multiple++;
+    }); */
+
+    e.emit("one");
+    e.emit("one");
+    e.emit("one");
+    //emitter.emit("one");
+    //emitter.emit("one");
+    //emitter.emit("one");
+
+    it('receive one time emittance only', function () {
+        assume(multiple).equals(6);
+        //assume(count1).equals(1);
+        //assume(count2).equals(1);
+    });
 });
 
 describe('Remove a listener / unsubscribe to an event', function () {
@@ -76,7 +113,7 @@ describe('Remove a listener / unsubscribe to an event', function () {
     });
 
 });
-   
+
 describe('Remove all listener', function () {
     const testFnOne = function () {};
     e.on("event A", testFnOne);

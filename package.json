@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/YinHk/event_emitter#readme",
   "dependencies": {
+    "assume": "^2.3.0",
     "mocha": "^10.0.0",
     "mocha-sinon": "^2.1.2",
     "sinon": "^14.0.0",
