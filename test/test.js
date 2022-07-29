@@ -70,27 +70,27 @@ describe('Ensure once emittance only for one time listener', function () {
     e.once("one", function () {
         count1++;
     });
-    /* emitter.once("one", function () {
+    emitter.once("one", function () {
         count2++;
-    }); */
-    /* e.on("one", function () {
+    }); 
+    e.on("one", function () {
         multiple++;
-    }); */
-    /* emitter.on("one", function () {
+    });
+    emitter.on("one", function () {
         multiple++;
-    }); */
+    });
 
     e.emit("one");
     e.emit("one");
     e.emit("one");
-    //emitter.emit("one");
-    //emitter.emit("one");
-    //emitter.emit("one");
-
+    emitter.emit("one");
+    emitter.emit("one");
+    emitter.emit("one");
+  
     it('receive one time emittance only', function () {
         assume(multiple).equals(6);
-        //assume(count1).equals(1);
-        //assume(count2).equals(1);
+        assume(count1).equals(1);
+        assume(count2).equals(1);
     });
 });
 
