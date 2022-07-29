@@ -9,10 +9,9 @@ Emitter.prototype.count = function count(e) {
 }
 
 function addCallback(e, cb, once, events) {
-    if (events.e) cbs = events.e;
-        else 
-    //let cbs = Object.assign(e, {'event': []})
-    if (!cbs) cbs = [];
+    let cbs;
+    if (events[e] != undefined) cbs = events[e]; 
+        else cbs = [];
     if (once)  {
         function onceListener (...payload) {
             this.off(e, cb);
@@ -20,7 +19,7 @@ function addCallback(e, cb, once, events) {
         }
         cbs.push(onceListener);
     } else cbs.push(cb);
-    this.events[e] = cbs;
+    if (events.e === undefined) Object.assign(events, {[e]: cbs}); 
     cbs = null;
 }
 
@@ -49,14 +48,14 @@ Emitter.prototype.emit = function emit(e, ...payload) {
 }
 
 Emitter.prototype.off = function off(e, cb) {
-    if (e && cb) {
-        if (this.events[e]) {
+    if (e && cb) { 
+        if (this.events[e]) { console.log(this.events[e])
             let cbs = [];
             for (var j =0; j<this.events[e].length; j++) {
                 if (cb !== this.events[e][j]) cbs.push(this.events[e][j]);
             }
             this.events[e] = cbs;
-            if (this.count(e) === 0) delete this.events[e];
+            if (this.count(e) === 0) delete this.events[e];  
             cbs = null;
         } else throw new Error(`Event "${e}" or listener doesn't exist, can't remove listener`);
     } 
@@ -64,7 +63,7 @@ Emitter.prototype.off = function off(e, cb) {
 }
 
 Emitter.prototype.removeAll = function removeAll() {
-    if (this.count !== 0) this.events = {};
+    if (this.count !== 0) this.events = {}; 
     return this;
 }
 
