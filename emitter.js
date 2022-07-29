@@ -39,7 +39,7 @@ Emitter.prototype.once = function once(e, cb) {
 }
 
 Emitter.prototype.emit = function emit(e, ...payload) {
-    let cbs = this.events[e];
+    let cbs = this.events[e]; console.log(this.events)
     if (cbs) {
         cbs.forEach(function (cb) {
             cb(...payload);
@@ -49,7 +49,7 @@ Emitter.prototype.emit = function emit(e, ...payload) {
 
 Emitter.prototype.off = function off(e, cb) {
     if (e && cb) { 
-        if (this.events[e]) { console.log(this.events[e])
+        if (this.events[e]) {
             let cbs = [];
             for (var j =0; j<this.events[e].length; j++) {
                 if (cb !== this.events[e][j]) cbs.push(this.events[e][j]);

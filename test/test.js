@@ -1,5 +1,9 @@
 var assert = require('chai').assert;
 var expect = require('chai').expect;
+var chai = require("chai");
+var sinon = require("sinon");
+var sinonChai = require("sinon-chai");
+chai.use(sinonChai);
 
 var { emitter, Emitter }  = require('../index');
 
@@ -27,9 +31,30 @@ describe('Subscribe one time listerner to an event', function () {
         assert.hasAnyKeys(emitter.self.events, "test2");
         assert.lengthOf(Object.keys(e.events["test2"]), 1, "should be 1 listener only");
         assert.lengthOf(Object.keys(emitter.self.events["test2"]), 1, "should be 1 listener only");
-        e.off('test2', function () {});
-        emitter.off('test2', function () {});
     });
+});
+
+
+describe('emit an event', function () {
+    const testFn = function (cb) { 
+        cb("event is trigged");
+    };
+    var cb = sinon.spy();
+    e.on("event", testFn(cb));
+    emitter.on("event", testFn(cb));
+    e.emit("A");
+    e.emit("B"); 
+    
+    /* it('a listener is being subscribed to an event', function () { 
+        assert.hasAnyKeys(e.events, "event");
+        assert.hasAnyKeys(emitter.self.events, "event");
+        assert.lengthOf(Object.keys(e.events["event"]), 1, "should be 1 listener only");
+        assert.lengthOf(Object.keys(emitter.self.events["event"]), 1, "should be 1 listener only");
+    });  */
+    it('callback is being executed when emitting an event', function () {
+       //expect(cb1).to.have.been.calledWith("event A is trigged");
+        //expect(cb2).to.have.been.calledWith("event B is trigged");
+    }); 
 });
 
 describe('Remove a listener / unsubscribe to an event', function () {
@@ -78,6 +103,10 @@ describe('Remove all listener', function () {
         expect(Object.keys(emitter.self.events)).to.be.empty;
     });
 });
+
+
+
+
 
 
 
