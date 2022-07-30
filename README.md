@@ -76,4 +76,5 @@ var { emitter } = require('util-eventemitter');
 
 
 
-
+## License
+[MIT](LICENSE)
