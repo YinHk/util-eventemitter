@@ -74,7 +74,10 @@ var { emitter } = require('util-eventemitter');
 - `event`[optional] - the name of the event
 > If event is skipped, returns number of events, otherwise it returns number of existing listeners for specific event
 
-
+## Tests
+```
+npm test
+```
 
 ## License
 [MIT](LICENSE)
