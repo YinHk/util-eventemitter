@@ -74,7 +74,7 @@ var { emitter } = require('util-eventemitter');
 - `event`[optional] - the name of the event
 > If event is skipped, returns number of events, otherwise it returns number of existing listeners for specific event
 
-## Tests
+## Tests [![Build Status](https://travis-ci.org/medikoo/event-emitter.png)](https://travis-ci.org/medikoo/event-emitter)
 ```
 npm test
 ```
