@@ -1,5 +1,5 @@
 # util-eventemitter
-A lightweight util - event emitter using in your JS project.
+A helpful, efficient and lightweight util - event emitter.
 
 ## Install
 ```
@@ -13,30 +13,41 @@ npm i util-eventemitter --save
 ## Usage
 ```js
 var { Emitter } = require('util-eventemitter');
-var emitter = new Emitter(); 
+var em = new Emitter(); 
 
 var callbackFn = function () {};
 
 //listener
-emitter.on('foo', callbackFn);
+em.on('foo', callbackFn);
+em.addEventListener('foo', callbackFn);
 
 //one time listener
-emitter.once('bar', callbackFn);
+em.once('bar', callbackFn);
+em.addOneTimeListener('bar', callbackFn);
 
 //emit
-emitter.emit('foo', ...arg);
+em.emit('foo', ...arg);
 
 //remove listener
-emitter.off('bar', callbackFn);
+em.off('bar', callbackFn);
+em.removeListener('bar', callbackFn);
 
 //clear all listeners 
-emitter.removeAll();
+em.removeAll();
+em.removeAllListeners();
 
 //check number of existing events
-emitter.count();
+em.count();
 
 //check number of listeners under the specific event
-emitter.count('event name');
+em.count('event name');
+```
+Alternatively, you can using `emitter` directly as imported module without initialization, as it is initialized. 
+```js
+var { emitter } = require('util-eventemitter');
+
+//no need to initialize, use it directly same as above
+
 ```
 
 
