@@ -1,5 +1,5 @@
 {
-  "name": "eventemitter-js",
+  "name": "util-eventemitter",
   "version": "1.0.0",
   "description": "A listener to an event and fire a callback after event being emitted.",
   "main": "index.js",
