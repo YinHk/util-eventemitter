@@ -76,7 +76,13 @@ var { emitter } = require('util-eventemitter');
 
 ## Tests [![Build Status](https://travis-ci.org/medikoo/event-emitter.png)](https://travis-ci.org/medikoo/event-emitter)
 ```
+npm install
 npm test
+```
+## Build
+```
+npm install
+npm run build
 ```
 
 ## License
