@@ -50,4 +50,16 @@ var { emitter } = require('util-eventemitter');
 
 ```
 
+## Method
+### on(event, fn) , addEventListener(event, fn)
+- event - the name of the event
+- fn - a callback function to trigger when event is emitted
+
+### once(event, fn) , addOneTimeListener(event, fn)
+- event - the name of the event
+- fn - a callback function to trigger when event is emitted
+> This listener only trigger listener only once
+
+
+
 
