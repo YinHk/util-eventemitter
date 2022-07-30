@@ -1,5 +1,5 @@
 # util-eventemitter
-A lightweight util - event emitter using in your .
+A lightweight util - event emitter using in your JS project.
 
 ## Install
 ```
