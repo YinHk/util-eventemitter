@@ -52,13 +52,27 @@ var { emitter } = require('util-eventemitter');
 
 ## Method
 ### on(event, fn) , addEventListener(event, fn)
-- event - the name of the event
-- fn - a callback function to trigger when event is emitted
+- `event` - the name of the event
+- `fn` - a callback function to trigger when event is emitted(listener)
 
 ### once(event, fn) , addOneTimeListener(event, fn)
-- event - the name of the event
-- fn - a callback function to trigger when event is emitted
+- `event` - the name of the event
+- `fn` - a callback function to trigger when event is emitted
 > This listener only trigger listener only once
+
+### emit(event[, ...payload])
+- `event` - the name of the event
+- `...payload`[optional] - a series of arguements pass to the listener
+
+### off(event[, fn]) , removeListener(event[, fn])
+- `event` - the name of the event
+- `fn` - a listener
+
+### removeAll() , removeAllListeners()
+
+### count(event)
+- `event`[optional] - the name of the event
+> If event is skipped, returns number of events, otherwise it returns number of existing listeners for specific event
 
 
 
