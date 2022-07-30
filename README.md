@@ -1,4 +1,4 @@
-# event_emitter
+# util-eventemitter
 A listener to an event and fire a callback after event being emitted.
 
 ## Installation
