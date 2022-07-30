@@ -1,6 +1,7 @@
 # util-eventemitter
 A helpful, efficient and lightweight util - event emitter.
 
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mui-org/material-ui/blob/master/LICENSE)
 ## Install
 ```
 npm i util-eventemitter
